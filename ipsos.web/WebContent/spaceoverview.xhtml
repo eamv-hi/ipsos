@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<body>
+	<h:form>
+		<p:messages id="messages" showDetail="false" autoUpdate="true" />
+
+		<h:panelGrid id="grid" columns="5" cellpadding="5">
+			<p:commandButton id="topbutton" value="List Topspaces"
+				actionListener="#{spaceOverviewView.topspaces}" ajax="false" />
+			<p:outputLabel for="search" value="Searchstring:" />
+			<p:inputText id="search"
+				value="#{spaceOverviewView.searchstring}" />
+			<p:message for="search" />
+			<p:commandButton id="searchbutton" value="Search Spaces"
+				actionListener="#{spaceOverviewView.search}" ajax="false" />
+		</h:panelGrid>
+
+		<p:dataTable id="table" var="space"
+			selection="#{spaceOverviewView.selectedSpace}"
+			rowKey="#{space.spaceid}" value="#{spaceOverviewView.spaces}" >
+			<p:column selectionMode="single" style="width:16px;text-align:center" />
+			<p:column headerText="Id">
+				<h:outputText value="#{space.spaceid}" />
+			</p:column>
+
+			<p:column headerText="Name">
+				<h:outputText value="#{space.spacename}" />
+			</p:column>
+			<p:column headerText="Type">
+				<h:outputText value="#{space.spacetype.stname}" />
+			</p:column>
+			<p:column headerText="Parent Id">
+				<h:outputText value="#{space.parent.spaceid}" />
+			</p:column>
+			<p:column headerText="Parent Name">
+				<h:outputText value="#{space.parent.spacename}" />
+			</p:column>
+			<f:facet name="footer">
+				<p:commandButton process="table" icon="ui-icon-search" value="List Children"
+					action="#{spaceOverviewView.viewChildren}" ajax="false" />
+				<p:commandButton process="table" icon="ui-icon-search" value="View/Edit"
+					action="#{spaceOverviewView.view}" ajax="false" />
+				<p:commandButton process="table" icon="ui-icon-search" value="Create new"
+					action="#{spaceOverviewView.create}" ajax="false" />
+				<p:commandButton process="table" icon="ui-icon-search" value="View Contacts"
+					action="#{spaceOverviewView.contacts}" ajax="false" />
+			</f:facet>
+			<p:ajax event="rowSelect" />
+		</p:dataTable>
+
+	</h:form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<body>
+	<h:form>
+		<p:messages id="messages" showDetail="false" autoUpdate="true" />
+
+		<h:panelGrid id="grid" columns="3" cellpadding="5">
+			<p:outputLabel for="spaceid" value="Spaceid:" />
+			<p:inputText id="spaceid" required="true"
+				disabled="#{spaceDetailView.edit}"
+				value="#{spaceDetailView.spaceid}" />
+			<p:message for="spaceid" />
+
+			<p:outputLabel for="spacename" value="Name:" />
+			<p:inputText id="spacename" required="true"
+				value="#{spaceDetailView.spacename}" />
+			<p:message for="spacename" display="text" />
+
+			<p:outputLabel for="spacetype" value="Type:" />
+			<p:selectOneMenu id="spacetype" value="#{spaceDetailView.spacetype}"
+				style="width:125px">
+				<f:selectItems value="#{spaceDetailView.spacetypes}" />
+			</p:selectOneMenu>
+			<p:message for="spacetype" display="text" />
+
+			<p:outputLabel for="parent" value="Parent:" />
+			<p:inputText id="parent" required="true"
+				disabled="#{spaceDetailView.editparent}"
+				value="#{spaceDetailView.parent.spaceid}" />
+			<p:message for="parent" display="text" />
+		</h:panelGrid>
+
+		<p:commandButton id="back" value="Back" immediate="true"
+			action="/spaceoverview.xhtml" ajax="false" />
+		<p:commandButton id="create" value="Create" update="grid"
+			rendered="#{spaceDetailView.showCreate}"
+			actionListener="#{spaceDetailView.create}" ajax="false" />
+		<p:commandButton id="update" value="Update" update="grid"
+			rendered="#{spaceDetailView.showUpdate}"
+			actionListener="#{spaceDetailView.update}" ajax="false" />
+		<p:commandButton id="delete" value="Delete" update="grid"
+			rendered="#{spaceDetailView.showDelete}"
+			actionListener="#{spaceDetailView.delete}" ajax="false" />
+	</h:form>
+</body>
+</html>
