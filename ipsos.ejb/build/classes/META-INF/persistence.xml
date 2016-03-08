@@ -3,7 +3,6 @@
 	<persistence-unit name="ipsos.ejb">
 		<jta-data-source>java:jboss/datasources/HsqldbDS</jta-data-source>
 		<properties>
-			<property name="javax.persistence.schema-generation.create-database-schemas" value="true"/>
 			<property name="hibernate.show_sql" value="true"/>
 		</properties>
 	</persistence-unit>
